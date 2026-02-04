@@ -1,9 +1,10 @@
 ﻿using ControleHardwaresCoworking.Interfaces;
+using ControleHardwaresCoworking.Repositories;
 namespace ControleHardwaresCoworking.Services
 {
-    public class VisualizaEstoqueService : IServices
+    public class VisualizaEstoqueService : IServices<EstoqueRepository>
     {
-        public void ProcessarFuncionalidade()
+        public void ProcessarFuncionalidade(EstoqueRepository estoqueRepository)
         {
             // Implementação do cadastro de item
         }

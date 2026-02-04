@@ -1,8 +1,7 @@
-﻿
-namespace ControleHardwaresCoworking.Interfaces
+﻿namespace ControleHardwaresCoworking.Interfaces
 {
-    public interface IServices
+    public interface IServices<T>
     {
-        void ProcessarFuncionalidade();
+        void ProcessarFuncionalidade(T entity);
     }
 }

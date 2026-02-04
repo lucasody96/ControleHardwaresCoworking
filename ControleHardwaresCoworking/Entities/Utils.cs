@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControleHardwaresCoworking.Repositories;
+using System;
 
 namespace HextecInformatica.Entities
 {
@@ -73,7 +74,60 @@ namespace HextecInformatica.Entities
             Console.WriteLine(new string(caractere, LarguraPadrao));
         }
 
-        
+        public static void ListarProdutosTela(EstoqueRepository repo)
+        {
+            var lista = repo.ListarItens();
+
+            if (lista.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\n[AVISO] Nenhum produto encontrado no estoque.");
+                Console.ResetColor();
+                return;
+            }
+
+            // --- 1. Formatação do Título ---
+            Console.WriteLine(); // Linha em branco
+            Console.ForegroundColor = ConsoleColor.Cyan; // Cor Azul Ciano para destaque
+            Console.WriteLine("===================================================================");
+            Console.WriteLine("                   LISTA DE PRODUTOS EM ESTOQUE                    ");
+            Console.WriteLine("===================================================================");
+            Console.ResetColor(); // Volta para a cor padrão
+
+            // --- 2. Cabeçalho da Tabela ---
+            // Explicação do {0,-5}: Ocupa 5 espaços e alinha à esquerda
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("{0,-5} | {1,-35} | {2,-10} | {3,-10}", "ID", "DESCRIÇÃO", "SALDO", "MÍNIMO");
+            Console.WriteLine(new string('-', 67)); // Cria uma linha de separação
+            Console.ResetColor();
+
+            // --- 3. Linhas de Dados ---
+            foreach (var item in lista)
+            {
+                // Tratamento para nomes muito longos não quebrarem a tabela
+                string nomeFormatado = item.Descricao.Length > 32
+                    ? item.Descricao.Substring(0, 32) + "..."
+                    : item.Descricao;
+
+                // Destaque visual: Se estoque estiver baixo (menor que o mínimo), pinta de vermelho
+                if (item.SaldoAtual < item.EstoqueMinimo)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+
+                Console.WriteLine("{0,-5} | {1,-35} | {2,-10} | {3,-10}",
+                    item.Id,
+                    nomeFormatado,
+                    item.SaldoAtual,
+                    item.EstoqueMinimo
+                );
+
+                Console.ResetColor(); // Reseta a cor para a próxima linha
+            }
+            Console.WriteLine("===================================================================");
+        }
+
+
     }
 }
 

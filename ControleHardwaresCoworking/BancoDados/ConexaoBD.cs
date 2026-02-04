@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-namespace ControleHardwaresCoworking.ConexaoBD
+namespace ControleHardwaresCoworking.BancoDados
 {
     public class ConexaoBD
     {

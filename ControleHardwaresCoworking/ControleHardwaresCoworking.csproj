@@ -43,10 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConexaoBD\ConexaoBD.cs" />
+    <Compile Include="BancoDados\ConexaoBD.cs" />
     <Compile Include="Entities\Core\Colaborador.cs" />
     <Compile Include="Entities\Core\Produto.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\Mensagem.cs" />
     <Compile Include="Entities\Utils.cs" />
     <Compile Include="Interfaces\IServices.cs" />
     <Compile Include="Program.cs" />

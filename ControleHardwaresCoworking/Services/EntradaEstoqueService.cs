@@ -1,13 +1,21 @@
 ﻿using ControleHardwaresCoworking.Interfaces;
+using ControleHardwaresCoworking.Repositories;
+using HextecInformatica.Entities;
+using System;
 
 namespace ControleHardwaresCoworking.Services
 {
-    public class EntradaEstoqueService: IServices
+    public class EntradaEstoqueService: IServices<EstoqueRepository>
     {
-        public void ProcessarFuncionalidade()
+        
+        public void ProcessarFuncionalidade(EstoqueRepository estoqueRepository)
         {
-            // Lógica para registrar a entrada de estoque
-        }
+            Console.Clear();
+            Utils.FormataCabecalho("ENTRADA DE ITENS NO ESTOQUE");
+            Utils.ListarProdutosTela(estoqueRepository);
 
+            Console.ReadKey();
+
+        }
     }
 }
