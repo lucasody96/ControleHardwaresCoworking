@@ -47,7 +47,7 @@ namespace ControleHardwaresCoworking.Services
                 return;
             }
 
-            int idColaborador = Utils.EvitaQuebraCodInt("\nInforme o código do colaborador solicitante do produto: ");
+            int idColaborador = Utils.EvitaQuebraCodInt("\nInforme o código do colaborador que registrou a entrada do produto: ");
 
             // ✅ AGORA COM TRANSAÇÃO: Usando a mesma conexão para ambas as operações
             try
