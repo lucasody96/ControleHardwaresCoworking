@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="BancoDados\ConexaoBD.cs" />
     <Compile Include="Entities\Core\Colaborador.cs" />
+    <Compile Include="Entities\Core\Movimentacao.cs" />
     <Compile Include="Entities\Core\Produto.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Mensagem.cs" />
@@ -64,11 +65,14 @@
     <Compile Include="Interfaces\IServices.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ColaboradorRepository.cs" />
     <Compile Include="Repositories\EstoqueRepository.cs" />
+    <Compile Include="Repositories\MovimentacaoRepository.cs" />
     <Compile Include="Services\AjusteEstoqueService.cs" />
     <Compile Include="Services\CadastrarItemService.cs" />
+    <Compile Include="Services\ManutencaoColaboradorService.cs" />
     <Compile Include="Services\EntradaEstoqueService.cs" />
-    <Compile Include="Services\ListarMovimentacoesService.cs" />
+    <Compile Include="Services\MovimentacoesService.cs" />
     <Compile Include="Services\SaidaEstoqueService.cs" />
     <Compile Include="Services\VisualizaEstoqueService.cs" />
   </ItemGroup>

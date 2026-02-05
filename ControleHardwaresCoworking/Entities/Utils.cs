@@ -76,7 +76,7 @@ namespace HextecInformatica.Entities
 
         public static void ListarProdutosTela(EstoqueRepository repo)
         {
-            var lista = repo.ListarItens();
+            var lista = repo.Listar();
 
             if (lista.Count == 0)
             {
@@ -127,6 +127,10 @@ namespace HextecInformatica.Entities
             Console.WriteLine("===================================================================");
         }
 
+        public static string PressioneTecla()
+        {
+            return "Pressione qualquer tecla para continuar...";
+        }
 
     }
 }

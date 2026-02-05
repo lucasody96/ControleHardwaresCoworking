@@ -3,9 +3,9 @@ using ControleHardwaresCoworking.Repositories;
 
 namespace ControleHardwaresCoworking.Services
 {
-    public class ListarMovimentacoesService: IServices<EstoqueRepository>
+    public class MovimentacoesService: IServices<MovimentacaoRepository>
     {
-        public void ProcessarFuncionalidade(EstoqueRepository estoqueRepository)
+        public void ProcessarFuncionalidade(MovimentacaoRepository movimentacao)
         {
             // Implementação do cadastro de item
         }

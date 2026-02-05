@@ -11,6 +11,9 @@ namespace ControleHardwaresCoworking
         static void Main()
         {
             EstoqueRepository estoqueRepository = new EstoqueRepository();
+            ColaboradorRepository colaboradorRepository = new ColaboradorRepository();
+            MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
+
             Mensagem mensagem = new Mensagem();
 
             while (true)
@@ -23,6 +26,7 @@ namespace ControleHardwaresCoworking
                 Console.WriteLine("3. Ajuste Item (Quebra/ Esquecimento de lançar)");
                 Console.WriteLine("4. Listar movimentações");
                 Console.WriteLine("5. Cadastrar Novo Item");
+                Console.WriteLine("6. Cadastrar novo Colaborador");
                 Console.WriteLine("0. Sair");
 
                 int opcao = Utils.EvitaQuebraCodInt("\nSelecione uma opção: ");
@@ -49,13 +53,18 @@ namespace ControleHardwaresCoworking
                         ajusteEstoqueService.ProcessarFuncionalidade(estoqueRepository);
                         break;
                     case 4:
-                        ListarMovimentacoesService listarMovimentacoesService = new ListarMovimentacoesService();
-                        listarMovimentacoesService.ProcessarFuncionalidade(estoqueRepository);
+                        MovimentacoesService MovimentacoesService = new MovimentacoesService();
+                        MovimentacoesService.ProcessarFuncionalidade(movimentacaoRepository);
                         break;
                     case 5:
                         CadastrarItemService cadastrarItemService = new CadastrarItemService();
                         cadastrarItemService.ProcessarFuncionalidade(estoqueRepository);
                         break;
+                    case 6:
+                        //implementação futura cadastro colaborador
+                        ManutencaoColaboradorService manutencaoColaboradorService = new ManutencaoColaboradorService();
+                        manutencaoColaboradorService.ProcessarFuncionalidade(colaboradorRepository);
+                        break;  
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
                         break;
