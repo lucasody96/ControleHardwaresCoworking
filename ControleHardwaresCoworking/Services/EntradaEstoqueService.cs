@@ -80,7 +80,7 @@ namespace ControleHardwaresCoworking.Services
                             // Confirma tudo
                             transacao.Commit();
 
-                            Console.WriteLine($"\n✔ Entrada de {quantidadeEntrada} unidades do produto '{produtoSelecionado.Descricao}' registrada com sucesso."+
+                            Console.WriteLine($"\nEntrada de {quantidadeEntrada} unidades do produto '{produtoSelecionado.Descricao}' registrada com sucesso."+
                                               $"\n{Utils.PressioneTecla()}");
                             Console.ReadKey();
                         }
@@ -94,7 +94,7 @@ namespace ControleHardwaresCoworking.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\n✖ Erro ao processar entrada: {ex.Message}");
+                Console.WriteLine($"\nErro ao processar entrada: {ex.Message}");
             }
         }
     }

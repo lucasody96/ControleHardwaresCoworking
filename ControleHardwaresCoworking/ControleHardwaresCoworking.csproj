@@ -59,6 +59,7 @@
     <Compile Include="Entities\Core\Colaborador.cs" />
     <Compile Include="Entities\Core\Movimentacao.cs" />
     <Compile Include="Entities\Core\Produto.cs" />
+    <Compile Include="Entities\Dtos\MovimentacaoRelatorio.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Mensagem.cs" />
     <Compile Include="Entities\Utils.cs" />

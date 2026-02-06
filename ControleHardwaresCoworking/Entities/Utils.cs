@@ -1,5 +1,7 @@
-﻿using ControleHardwaresCoworking.Repositories;
+﻿using ControleHardwaresCoworking.Entities.Dtos;
+using ControleHardwaresCoworking.Repositories;
 using System;
+using System.Collections.Generic;
 
 namespace HextecInformatica.Entities
 {
@@ -20,6 +22,22 @@ namespace HextecInformatica.Entities
                 Console.Write(mensagem);
             }
             return numInteiro;
+        }
+
+        public static DateTime EvitaQuebraCodData(string mensagem)
+        {
+            DateTime data;
+
+            Console.Write(mensagem);
+
+            while (!DateTime.TryParse(Console.ReadLine(), out data))
+            {
+                Console.Write("Erro: Valor inválido (Informe apenas a data) \n\n");
+                Console.Write(mensagem);
+            }
+
+            return data;
+
         }
 
         public static double EvitaQuebraCodFloat(string mensagem)
@@ -125,6 +143,82 @@ namespace HextecInformatica.Entities
                 Console.ResetColor(); // Reseta a cor para a próxima linha
             }
             Console.WriteLine("===================================================================");
+        }
+
+        // Mude o parâmetro de (MovimentacaoRepository repo) PARA (List<MovimentacaoRelatorio> lista)
+        public static void ListarMovimentacoesTela(List<MovimentacaoRelatorio> lista)
+        {
+            // REMOVA esta linha: var lista = repo.ListarComNomes(); 
+            // (A lista já veio pronta no parâmetro!)
+
+            if (lista.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\n[AVISO] Nenhuma movimentação encontrada para essa busca.");
+                Console.ResetColor();
+                return;
+            }
+
+            // --- CABEÇALHO COM AQUELE VISUAL ---
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("=============================================================================================");
+            Console.WriteLine("                                  HISTÓRICO DE MOVIMENTAÇÕES                                 ");
+            Console.WriteLine("=============================================================================================");
+            Console.ResetColor();
+
+            // Cabeçalho das Colunas (Alinhamento negativo = esquerda)
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("{0,-18} | {1,-10} | {2,-30} | {3,-5} | {4,-20}",
+                "DATA/HORA", "TIPO", "PRODUTO", "QTD", "COLABORADOR");
+            Console.WriteLine(new string('-', 93));
+            Console.ResetColor();
+
+            // --- LINHAS ---
+            foreach (var item in lista)
+            {
+                // 1. Define a cor e o texto do Tipo
+                string textoTipo = "";
+                ConsoleColor corTipo = ConsoleColor.White;
+
+                switch (char.ToUpper(item.Tipo))
+                {
+                    case 'E':
+                        textoTipo = "ENTRADA";
+                        corTipo = ConsoleColor.Green; // Verde para lucro/entrada
+                        break;
+                    case 'S':
+                        textoTipo = "SAÍDA";
+                        corTipo = ConsoleColor.Red;   // Vermelho para saída
+                        break;
+                    case 'A':
+                        textoTipo = "AJUSTE";
+                        corTipo = ConsoleColor.Yellow; // Amarelo para atenção
+                        break;
+                }
+
+                // 2. Trata nomes muito longos (para não quebrar a tabela) e nulos
+                string prodFormatado = item.NomeProduto.Length > 28 ? item.NomeProduto.Substring(0, 28) + ".." : item.NomeProduto;
+
+                string colabFormatado = item.NomeColaborador ?? "-"; // Se for null, coloca um traço
+                if (colabFormatado.Length > 18) colabFormatado = colabFormatado.Substring(0, 18) + "..";
+
+                // 3. Imprime a linha formatada
+                Console.Write("{0,-18} | ", item.DataMovimentacao.ToString("dd/MM/yy"));
+
+                Console.ForegroundColor = corTipo;
+                Console.Write("{0,-10}", textoTipo);
+                Console.ResetColor();
+
+                Console.WriteLine(" | {0,-30} | {1,-5} | {2,-20}",
+                    prodFormatado,
+                    item.Quantidade,
+                    colabFormatado);
+            }
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("=============================================================================================");
+            Console.ResetColor();
         }
 
         public static string PressioneTecla()

@@ -51,7 +51,7 @@ namespace ControleHardwaresCoworking.Services
 
                             transacao.Commit();
 
-                            Console.WriteLine($"\n✔ Item {novoProduto.Descricao} cadastrado com sucesso.{Utils.PressioneTecla()}");
+                            Console.WriteLine($"\nItem {novoProduto.Descricao} cadastrado com sucesso.{Utils.PressioneTecla()}");
                             Console.ReadKey();
                         }
                         catch
@@ -65,7 +65,6 @@ namespace ControleHardwaresCoworking.Services
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine($"\n✖ Erro ao processar inserção do item: {ex.Message}");
             }
 
