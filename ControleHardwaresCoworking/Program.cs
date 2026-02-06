@@ -14,8 +14,6 @@ namespace ControleHardwaresCoworking
             ColaboradorRepository colaboradorRepository = new ColaboradorRepository();
             MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
 
-            Mensagem mensagem = new Mensagem();
-
             while (true)
             {
                 Console.Clear();
@@ -33,7 +31,7 @@ namespace ControleHardwaresCoworking
 
                 if (opcao == 0)
                 {
-                    Console.WriteLine($"Saindo do sistema. {mensagem.PressioneTecla()}");
+                    Console.WriteLine($"Saindo do sistema. {Utils.PressioneTecla()}");
                     Console.ReadKey();
                     break;
                 }
