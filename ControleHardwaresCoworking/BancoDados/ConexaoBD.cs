@@ -5,7 +5,7 @@ namespace ControleHardwaresCoworking.BancoDados
     public class ConexaoBD
     {
         // Ajuste o "Server" para o nome do seu servidor SQL
-        private readonly string connectionString = "Server=MTZNOTFS058675;Database=CONTROLE_HARDWARE_COWORKING;Trusted_Connection=True;";
+        private readonly string connectionString = "Server=192.168.10.83;Database=CONTROLE_HARDWARE_COWORKING;User Id=CNP;Password=ninguemsabe;";
 
         public SqlConnection ObterConexao()
         {

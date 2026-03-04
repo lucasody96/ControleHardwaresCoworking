@@ -24,7 +24,7 @@ namespace ControleHardwaresCoworking
                 Console.WriteLine("3. Ajuste Item (Quebra/ Esquecimento de lançar)");
                 Console.WriteLine("4. Listar movimentações");
                 Console.WriteLine("5. Cadastrar Novo Item");
-                Console.WriteLine("6. Cadastrar novo Colaborador");
+                Console.WriteLine("6. Manutenção de Colaboradores");
                 Console.WriteLine("0. Sair");
 
                 int opcao = Utils.EvitaQuebraCodInt("\nSelecione uma opção: ");
@@ -59,7 +59,6 @@ namespace ControleHardwaresCoworking
                         cadastrarItemService.ProcessarFuncionalidade(estoqueRepository);
                         break;
                     case 6:
-                        //implementação futura cadastro colaborador
                         ManutencaoColaboradorService manutencaoColaboradorService = new ManutencaoColaboradorService();
                         manutencaoColaboradorService.ProcessarFuncionalidade(colaboradorRepository);
                         break;  

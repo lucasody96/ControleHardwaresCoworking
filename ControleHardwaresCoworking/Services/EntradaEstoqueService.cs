@@ -14,88 +14,90 @@ namespace ControleHardwaresCoworking.Services
         
         public void ProcessarFuncionalidade(EstoqueRepository estoqueRepository)
         {
-            Console.Clear();
-            Utils.FormataCabecalho("ENTRADA DE ITENS NO ESTOQUE");
-            Utils.ListarProdutosTela(estoqueRepository);
-
-            int codItem = Utils.EvitaQuebraCodInt("\nPara atualizar a quantidade disponível de um produto, "+
-                                                  "informe o código do produto desejado ou 0 para sair: ");
-            
-            if (codItem == 0)
-            {  
-                Console.WriteLine("Voltando ao menu anterior...");
-                Console.ReadKey();
-                return;
-            }
-
-            Produto produtoSelecionado = estoqueRepository.ObterPorCodigo(codItem);
-
-            if (produtoSelecionado == null)
+            while (true)
             {
-                Console.WriteLine("Produto não encontrado. Operação cancelada.");
-                Console.ReadKey();
-                return;
-            }
+                Console.Clear();
+                Utils.FormataCabecalho("ENTRADA DE ITENS NO ESTOQUE");
+                Utils.ListarProdutosTela(estoqueRepository);
 
-            Console.WriteLine($"Produto selecionado: {produtoSelecionado.Descricao}");
-            int quantidadeEntrada = Utils.EvitaQuebraCodInt("\nInforme a quantidade a ser adicionada ao estoque:");
+                int codItem = Utils.EvitaQuebraCodInt("\nPara atualizar a quantidade disponível de um produto, " +
+                                                      "informe o código do produto desejado ou 0 para sair: ");
 
-            if (quantidadeEntrada <= 0)
-            {
-                Console.WriteLine("Quantidade inválida. Operação cancelada.");
-                Console.ReadKey();
-                return;
-            }
-
-            int idColaborador = Utils.EvitaQuebraCodInt("\nInforme o código do colaborador que registrou a entrada do produto: ");
-
-            // ✅ AGORA COM TRANSAÇÃO: Usando a mesma conexão para ambas as operações
-            try
-            {
-                using (var conexao = _conexaoBD.ObterConexao())
+                if (codItem == 0)
                 {
-                    conexao.Open();
-                    using (var transacao = conexao.BeginTransaction())
+                    Console.WriteLine("Voltando ao menu anterior...");
+                    Console.ReadKey();
+                    return;
+                }
+
+                Produto produtoSelecionado = estoqueRepository.ObterPorCodigo(codItem);
+
+                if (produtoSelecionado == null)
+                {
+                    Console.WriteLine("Produto não encontrado. Operação cancelada.");
+                    Console.ReadKey();
+                    return;
+                }
+
+                Console.WriteLine($"Produto selecionado: {produtoSelecionado.Descricao}");
+                int quantidadeEntrada = Utils.EvitaQuebraCodInt("\nInforme a quantidade a ser adicionada ao estoque: ");
+
+                if (quantidadeEntrada <= 0)
+                {
+                    Console.WriteLine("Quantidade inválida. Operação cancelada.");
+                    Console.ReadKey();
+                    return;
+                }
+
+                // ✅ AGORA COM TRANSAÇÃO: Usando a mesma conexão para ambas as operações
+                try
+                {
+                    using (var conexao = _conexaoBD.ObterConexao())
                     {
-                        try
+                        conexao.Open();
+                        using (var transacao = conexao.BeginTransaction())
                         {
-                            // Atualizar estoque (usando a sobrecarga COM transação)
-                            estoqueRepository.Atualizar(
-                                produtoSelecionado.Id, 
-                                produtoSelecionado.SaldoAtual + quantidadeEntrada,
-                                conexao,
-                                transacao
-                            );
-
-                            // Inserir movimentação (usando a sobrecarga COM transação)
-                            _movimentacaoRepos.Inserir(new Movimentacao
+                            try
                             {
-                                IdProduto = produtoSelecionado.Id,
-                                IdColaborador = idColaborador,
-                                Tipo = 'E',
-                                Quantidade = quantidadeEntrada,
-                                DataMovimentacao = DateTime.Now
-                            }, conexao, transacao);
+                                // Atualizar estoque (usando a sobrecarga COM transação)
+                                estoqueRepository.Atualizar(
+                                    produtoSelecionado.Id,
+                                    produtoSelecionado.SaldoAtual + quantidadeEntrada,
+                                    conexao,
+                                    transacao
+                                );
 
-                            // Confirma tudo
-                            transacao.Commit();
+                                // Inserir movimentação (usando a sobrecarga COM transação)
+                                _movimentacaoRepos.Inserir(new Movimentacao
+                                {
+                                    IdProduto = produtoSelecionado.Id,
+                                    IdColaborador = 29,
+                                    Tipo = 'E',
+                                    Quantidade = quantidadeEntrada,
+                                    DataMovimentacao = DateTime.Now
+                                }, conexao, transacao);
 
-                            Console.WriteLine($"\nEntrada de {quantidadeEntrada} unidades do produto '{produtoSelecionado.Descricao}' registrada com sucesso."+
-                                              $"\n{Utils.PressioneTecla()}");
-                            Console.ReadKey();
-                        }
-                        catch
-                        {
-                            transacao.Rollback();
-                            throw;
+                                // Confirma tudo
+                                transacao.Commit();
+
+                                Console.WriteLine($"\nEntrada de {quantidadeEntrada} unidades do produto '{produtoSelecionado.Descricao}' registrada com sucesso." +
+                                                  $"\n{Utils.PressioneTecla()}");
+                                Console.ReadKey();
+                            }
+                            catch
+                            {
+                                transacao.Rollback();
+                                throw;
+                            }
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"\nErro ao processar entrada: {ex.Message}");
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"\nErro ao processar entrada: {ex.Message}");
+                }
             }
         }
+            
     }
 }

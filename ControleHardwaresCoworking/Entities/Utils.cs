@@ -1,4 +1,5 @@
-﻿using ControleHardwaresCoworking.Entities.Dtos;
+﻿using ControleHardwaresCoworking.Entities.Core;
+using ControleHardwaresCoworking.Entities.Dtos;
 using ControleHardwaresCoworking.Repositories;
 using System;
 using System.Collections.Generic;
@@ -218,6 +219,49 @@ namespace HextecInformatica.Entities
 
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("=============================================================================================");
+            Console.ResetColor();
+        }
+
+        public static void ListarColaboradoresTela(List<Colaborador> lista)
+        {
+            if (lista.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\n[AVISO] Nenhum colaborador encontrado cadastrado.");
+                Console.ResetColor();
+                return;
+            }
+
+            // --- 1. Formatação do Título ---
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("===================================================================");
+            Console.WriteLine("                       LISTA DE COLABORADORES                      ");
+            Console.WriteLine("===================================================================");
+            Console.ResetColor();
+
+            // --- 2. Cabeçalho da Tabela ---
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("{0,-10} | {1,-50}", "CÓDIGO", "NOME");
+            Console.WriteLine(new string('-', 67));
+            Console.ResetColor();
+
+            // --- 3. Linhas de Dados ---
+            foreach (var item in lista)
+            {
+                // Tratamento para nomes muito longos não quebrarem a tabela
+                string nomeFormatado = item.Nome.Length > 47
+                    ? item.Nome.Substring(0, 47) + "..."
+                    : item.Nome;
+
+                Console.WriteLine("{0,-10} | {1,-50}",
+                    item.Id,
+                    nomeFormatado
+                );
+            }
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("===================================================================");
             Console.ResetColor();
         }
 
