@@ -25,6 +25,7 @@ namespace ControleHardwaresCoworking.Services
                 Console.WriteLine("\n [I] Incluir Novo Colaborador");
                 Console.WriteLine(" [A] Alterar");
                 Console.WriteLine(" [E] Excluir");
+                Console.WriteLine(" [S] Sair");
                 Console.Write("\nO que você deseja fazer: ");
                 string resposta = Console.ReadLine().ToUpper();
 

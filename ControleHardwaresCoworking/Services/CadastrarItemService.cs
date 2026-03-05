@@ -29,7 +29,7 @@ namespace ControleHardwaresCoworking.Services
 
                 Console.WriteLine("Informe os dados do novo produto:");
                 Console.Write("Descrição: ");
-                string descricao = Console.ReadLine();
+                string descricao = Console.ReadLine().ToUpper();
                 int saldoAtual = Utils.EvitaQuebraCodInt("Saldo Atual: ");
                 int estoqueMinimo = Utils.EvitaQuebraCodInt("Estoque Mínimo: ");
 
