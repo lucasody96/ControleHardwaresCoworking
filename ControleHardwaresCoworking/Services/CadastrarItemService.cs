@@ -15,7 +15,6 @@ namespace ControleHardwaresCoworking.Services
             while (true)
             {
                 Console.Clear();
-                Utils.FormataCabecalho("CADASTRAR ITEM NO ESTOQUE");
                 Utils.ListarProdutosTela(estoqueRepository);
 
                 Console.Write("Deseja cadastrar um novo produto (S/N)? ");

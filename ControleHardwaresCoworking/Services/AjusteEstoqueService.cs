@@ -16,7 +16,6 @@ namespace ControleHardwaresCoworking.Services
             while (true)
             {
                 Console.Clear();
-                Utils.FormataCabecalho("AJUSTE DE ITENS NO ESTOQUE");
                 Utils.ListarProdutosTela(estoqueRepository);
 
                 int codItem = Utils.EvitaQuebraCodInt("\nPara ajustar um produto (perda/quebra), " +

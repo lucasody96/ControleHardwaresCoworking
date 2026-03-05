@@ -19,6 +19,7 @@ namespace HextecInformatica.Entities
 
             while (!int.TryParse(Console.ReadLine(), out numInteiro))
             {
+                Console.Clear();
                 Console.Write("Erro: Valor inválido (Informe apenas números inteiros) \n\n");
                 Console.Write(mensagem);
             }
@@ -33,6 +34,7 @@ namespace HextecInformatica.Entities
 
             while (!DateTime.TryParse(Console.ReadLine(), out data))
             {
+                Console.Clear();
                 Console.Write("Erro: Valor inválido (Informe apenas a data) \n\n");
                 Console.Write(mensagem);
             }
@@ -49,6 +51,7 @@ namespace HextecInformatica.Entities
 
             while (!double.TryParse(Console.ReadLine(), out numFloat))
             {
+                Console.Clear();
                 Console.Write("Erro: Valor inválido , não é permitido informar letras e deve ser informado algum valor\n\n");
                 Console.Write(mensagem);
             }
@@ -65,6 +68,7 @@ namespace HextecInformatica.Entities
             // 2. Usamos decimal.TryParse
             while (!decimal.TryParse(Console.ReadLine(), out numDecimal))
             {
+                Console.Clear();
                 Console.Write("Erro: Valor inválido. Não é permitido informar letras e deve ser informado algum valor.\n\n");
                 Console.Write(mensagem);
             }
@@ -95,6 +99,7 @@ namespace HextecInformatica.Entities
 
         public static void ListarProdutosTela(EstoqueRepository repo)
         {
+            Console.Clear();
             var lista = repo.Listar();
 
             if (lista.Count == 0)
@@ -149,9 +154,9 @@ namespace HextecInformatica.Entities
         // Mude o parâmetro de (MovimentacaoRepository repo) PARA (List<MovimentacaoRelatorio> lista)
         public static void ListarMovimentacoesTela(List<MovimentacaoRelatorio> lista)
         {
-            // REMOVA esta linha: var lista = repo.ListarComNomes(); 
-            // (A lista já veio pronta no parâmetro!)
-
+            
+            Console.Clear();
+         
             if (lista.Count == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -224,6 +229,8 @@ namespace HextecInformatica.Entities
 
         public static void ListarColaboradoresTela(List<Colaborador> lista)
         {
+            Console.Clear();
+
             if (lista.Count == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;

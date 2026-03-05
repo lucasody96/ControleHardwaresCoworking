@@ -20,7 +20,6 @@ namespace ControleHardwaresCoworking.Services
             while (true)
             {
                 Console.Clear();
-                Utils.FormataCabecalho("RETIRADA DE ITENS NO ESTOQUE");
                 Utils.ListarProdutosTela(estoqueRepository);
 
                 int codItem = Utils.EvitaQuebraCodInt("\nPara retirar um produto, " +
@@ -104,6 +103,8 @@ namespace ControleHardwaresCoworking.Services
                 {
                     Console.WriteLine($"\nErro ao processar retirada de produto: {ex.Message}");
                 }
+
+                Console.Clear();
             }
         }
     }
